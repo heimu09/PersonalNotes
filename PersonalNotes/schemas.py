@@ -2,6 +2,7 @@ from typing import List, Optional
 from pydantic import BaseModel
 from datetime import datetime
 
+
 class NoteBase(BaseModel):
     title: str
     content: str
@@ -16,7 +17,21 @@ class NoteUpdate(NoteBase):
 class Note(NoteBase):
     id: int
     created_at: datetime
-    updated_at: datetime
+    updated_at: Optional[datetime] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
+
+class UserBase(BaseModel):
+    username: str
+    email: str
+
+class UserCreate(UserBase):
+    password: str
+
+class User(UserBase):
+    id: int
+    notes: List[Note] = []
+
+    class Config:
+        from_attributes = True
