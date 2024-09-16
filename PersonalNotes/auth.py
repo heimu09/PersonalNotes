@@ -1,3 +1,4 @@
+import os
 from passlib.context import CryptContext
 from jose import JWTError, jwt
 from datetime import datetime, timedelta
@@ -8,7 +9,7 @@ from sqlalchemy.orm import Session
 from .database import get_db
 from . import crud
 
-SECRET_KEY = "bsjnakfjvsjknvkndqknmkjnkjdnsnkdsndsndmndsnk2390932jndms"
+SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 

@@ -1,6 +1,8 @@
 import logging
 import httpx
 import asyncio
+import os
+
 from aiogram import Bot, Dispatcher, types
 from aiogram.enums import ParseMode
 from aiogram.fsm.state import State, StatesGroup
@@ -8,11 +10,10 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram import Router
 from aiogram.filters import Command
-from aiogram.filters.state import State  # Используем State для фильтрации состояний
+from aiogram.filters.state import State
 
-# Настройки
-API_TOKEN = '5879430362:AAFT_WFUPT_JYUc8y-0U6Qce4WGwro-KCZc'
-API_BASE_URL = 'http://127.0.0.1:8000'  # URL вашего FastAPI-приложения
+API_TOKEN = os.getenv('TELEGRAM_API_TOKEN')
+API_BASE_URL = os.getenv('API_BASE_URL')
 
 # Инициализация бота и диспетчера
 bot = Bot(token=API_TOKEN)
