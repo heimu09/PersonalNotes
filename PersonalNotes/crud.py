@@ -46,7 +46,6 @@ def create_user(db: Session, user: schemas.UserCreate):
     return db_user
 
 def get_notes_by_tags(db: Session, user_id: int, tags: list):
-    # Оператор && проверяет пересечение массивов
     return db.query(models.Note).filter(
         models.Note.owner_id == user_id,
         models.Note.tags.op("&&")(tags)
