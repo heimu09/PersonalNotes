@@ -53,3 +53,11 @@ def delete_note(note_id: int, db: Session = Depends(get_db), current_user: schem
     if db_note is None or db_note.owner_id != current_user.id:
         raise HTTPException(status_code=404, detail="Note not found")
     return crud.delete_note(db=db, note_id=note_id)
+
+@app.get("/notes/search/", response_model=List[schemas.Note])
+async def search_notes_by_tags(tags: str, db: Session = Depends(get_db), current_user: schemas.User = Depends(auth.get_current_user)):
+    tags_list = tags.split(",")
+    notes = crud.get_notes_by_tags(db, user_id=current_user.id, tags=tags_list)
+    if not notes:
+        raise HTTPException(status_code=404, detail="Заметки не найдены")
+    return notes

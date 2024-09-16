@@ -12,6 +12,8 @@ alembic = "*"
 python-jose = {extras = ["cryptography"], version = "*"}
 python-multipart = "*"
 passlib = {extras = ["argon2"], version = "*"}
+aiogram = "*"
+httpx = "*"
 
 [dev-packages]
 
